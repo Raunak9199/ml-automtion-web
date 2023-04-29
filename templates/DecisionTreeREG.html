@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        body {
+          background-color: lightblue;
+          color: Black;
+          font-family: "Courier New", monospace;
+
+            }
+
+            fieldset {
+                background: lightblue;
+
+
+
+                border-radius: 25px;
+                padding: 20px;
+                width: 800px;
+            }
+            label {
+                width: 180px;
+                display: inline-block;
+                text-align: right;
+                vertical-align: text-top;
+            }
+            input[type="radio"] + label,
+            input[type="checkbox"] + label {
+                width: auto;
+            }
+            textarea {
+                width: 360px;
+                height: 50px;
+            }
+            .label-input-range {
+                display: inline-block;
+                text-align: center;
+                width: 80px;
+                color: red;
+            }
+            input:hover,
+            label:hover,button:hover {
+                font-size: 15px;
+            }
+
+            .button {border-radius: 20px;}
+
+
+        </style>
+
+
+
+
+
+
+  </head>
+  <body>
+    <h1>DECISION TREE REGRESSOR</h1>
+
+        <fieldset>
+
+
+          <form class="" action="{% url 'result' %}" method="get">
+            {%  csrf_token %}
+            Enter the index for feature column (e.g 1,2,3,4): <input type="text" required name="fc"><br><br>
+            Enter the index for TARGET COLUMN  : <input type="text" required name="tc"><br><br>
+            Enter Values Separated by Commas: <input type="text" required name="SL"> <br> <br>
+
+
+
+
+            <legend>Select Hyperparameters</legend>
+            <label for="Split">Split :</label>
+
+            <input type="text" id="Split" name="Split">
+            <br>
+            <br>
+            <label for="criterion">Criterion :</label>
+            <select id="criterion" name="criterion">
+              <option value="mse">mse</option>
+              <option value="friedman_mse">friedman_mse</option>
+              <option value="sae">sae</option>
+              <option value="poisson">poisson</option>
+            </select>
+            <br>
+            <br>
+            <label for="splitter">Splitter :</label>
+            <select id="splitter" name="splitter">
+                <option value="best">best</option>
+                <option value="random">random</option>
+            </select>
+            <br>
+            <br>
+            <label for="max">Max Features :</label>
+            <select id="max" name="max">
+                <option value="auto">auto</option>
+                <option value="sqrt">sqrt</option>
+                <option value="log2">log2</option>
+            </select>
+            <br>
+            <br>
+            <br>
+            <br>
+            Enter the index for x-axis : <input type="text" required name="xaxis">
+            <br>
+            <br>
+            Enter the index for y-axis : <input type="text" required name="yaxis">
+            <br>
+            <br>
+
+            <label for="graph">Select Graph :</label>
+            <select id="graph" name="graph">
+              <option value="line">line</option>
+              <option value="pie">pie</option>
+              <option value="hist">hist</option>
+              <option value="scatter">scatter</option>
+              <option value="corr">corr</option>
+
+
+            </select>
+            <br>
+            <br>
+
+          <input type="submit" name="submit7" value="Submit"> <br><br>
+
+
+
+
+          </form>
+        </fieldset>
+        <fieldset>
+          predicted value is {{y_pred}}<br>
+          <br>
+          the test accuracy is {{acc}}
+          <br>
+          <br>
+          the train accuracy is {{acc1}}
+          <br>
+          <br>
+        </fieldset>
+        <fieldset>
+
+          <h3>Graph</h3>
+            {% autoescape off %}
+            {{ plot_div }}
+            {% endautoescape %}
+        </fieldset>
+  </body>
+</html>
